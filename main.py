@@ -57,7 +57,7 @@ def draw_next_generation(generation):
                 pygame.draw.rect(gameDisplay, white, [i * 50, j * 50, 50, 50])
 
 
-generation = [[0 for i in range(20)] for j in range(15)]
+generation = [[0 for i in range(15)] for j in range(20)]
 while not finished:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -74,11 +74,11 @@ while not finished:
                 if generation[i][j] == 1:
                     generation[i][j] = 0
                     draw_next_generation(generation)
-        elif event.key == pygame.K_SPACE:
-            generation = [[0 for i in range(15)] for j in range(20)]
-            draw_next_generation(generation)
-        elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_RIGHT:
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_SPACE:
+                generation = [[0 for i in range(15)] for j in range(20)]
+                draw_next_generation(generation)
+            elif event.key == pygame.K_RIGHT:
                 generation = get_next_generation(generation)
                 draw_next_generation(generation)
     for x0 in range(0, 1000, 50):
